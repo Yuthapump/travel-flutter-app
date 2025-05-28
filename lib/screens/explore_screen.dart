@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});
@@ -9,12 +11,43 @@ class ExploreScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Explore"),
         centerTitle: true,
-        // backgroundColor: Colors.teal,
         elevation: 0,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // --- Map Section ---
+          Container(
+            height: 180,
+            margin: const EdgeInsets.only(bottom: 18),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(18),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.teal.withOpacity(0.10),
+                  blurRadius: 12,
+                  offset: const Offset(0, 6),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(18),
+              child: FlutterMap(
+                options: MapOptions(
+                  center: LatLng(13.7563, 100.5018), // Bangkok
+                  zoom: 5,
+                ),
+                children: [
+                  TileLayer(
+                    urlTemplate:
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    userAgentPackageName: 'com.example.app',
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // --- End Map Section ---
           Row(
             children: [
               const Icon(Icons.explore, color: Colors.teal, size: 28),

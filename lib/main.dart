@@ -1,7 +1,7 @@
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/main_page.dart';
-// import 'screens/home_screen.dart';
+import 'package:flutter_app/splash_screen.dart';
 
 // with Device Preview enabled
 // void main() => runApp(
@@ -29,7 +29,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const MainPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/main': (context) => const MainPage(),
+      },
     );
   }
 }
